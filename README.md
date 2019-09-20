@@ -1,24 +1,6 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+GTFS - APP 
+Моё приложение отслеживает все маршруты движения транспорта г. Спб (прямые и обратные), показывает остановки, считает среднюю скорость движения на маршруте и показывает количество автобусов. Используется БД и Realtime API портала общественного транспорта г. Спб.
+===============================================================
+http://transport.orgp.spb.ru/Portal/transport/internalapi/gtfs/
+=============================================================================
+http://portal.gpt.adc.spb.ru/Portal/transport/internalapi/vehicles/positions/?transports=bus,tram,trolley,ship&bbox=29.498291,60.384005,30.932007,59.684381
