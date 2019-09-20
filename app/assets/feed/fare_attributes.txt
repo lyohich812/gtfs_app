@@ -1,0 +1,5 @@
+fare_id,price,currency_type,payment_method,transfers
+3,80,RUB,0,0
+1,40,RUB,0,0
+4,120,RUB,0,0
+2,30,RUB,0,0

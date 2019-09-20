@@ -1,0 +1,95 @@
+head    
+  link[rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""]
+  script[src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""]
+  
+  h1 id="routename"
+  h2 id="vidget" 15 sec calculating...
+body
+
+  div class="flex"
+    div class="buttons-menu"
+      |<button class="large button" onclick="window.location.href = '/routes';">Маршруты</button>   
+      |<button class="large button" onclick="window.location.href = '#{@route.id}/stops';">Остановки</button> 
+      |<button class="large button" onclick="window.location.href = '#{@route.id}/analitics';">Аналитика</button>   
+
+    
+    div id="mapid"
+        script
+          |  var mymap = L.map('mapid').setView([59.9949312, 30.2931968,13], 13); 
+            
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { 
+              attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+              maxZoom: 20 
+              }).addTo(mymap); 
+              
+              var latlngs =  #{raw @shapeArr}; 
+              var latlngsBack = #{raw @shapeBackArr};
+              var polylineArray = [];
+              var polylineBackArray = [];
+              for (var i=0; i<latlngs.length; i++) {
+                var polyline = L.polyline(latlngs, {color: 'red', opacity: 0}).addTo(mymap); 
+                polylineArray.push(polyline);
+              }
+
+              for (var i=0; i<latlngsBack.length; i++) {
+                var polyline = L.polyline(latlngsBack, {color: 'blue', opacity: 0}).addTo(mymap);
+                polylineBackArray.push(polyline);
+              }
+                
+
+              var forward = true;
+              var markers = #{raw @stopCords};
+              var stopnames = #{raw @stopNames};
+              var markersBack = #{raw @stopCordsBack};
+              var stopnamesBack = #{raw @stopNamesBack};
+
+              var route = L.featureGroup().addTo(mymap);
+              var markersArray =[];
+              for (var i=0; i<markers.length; i++){
+                var marker = new L.marker(markers[i]);
+                marker.setOpacity(0);
+                markersArray.push(marker);
+                route.addLayer(marker);
+              }
+              var markersBackArray = [];
+              for (var i=0; i<markersBack.length; i++){
+                var marker = new L.marker(markersBack[i]);
+                marker.setOpacity(0);
+                markersBackArray.push(marker);
+                route.addLayer(marker);
+              }
+              showForward();
+
+              vehicles = null;
+              var numberOfVehicles = 0;
+              api = "http://portal.gpt.adc.spb.ru/Portal/transport/internalapi/vehicles/positions/?transports=bus,tram,trolley,ship&bbox=29.498291,60.384005,30.932007,59.684381&routeIDs=#{@route.route_id}";
+              setInterval(getVehicles, 1000);
+
+              FirstPositionArr = [];
+              SecondPositionArr = [];
+
+              window.onload = function () {
+                setTimeout(initArrays, 2000);
+              }
+
+              DistArr = [];
+              SpeedArr = [];
+              var AverageV = 0;
+
+                  
+              $("#routename").html("#{@route.route_long_name}"+"("+"#{@route.route_short_name}"+")");
+              setInterval(function(){
+                $("#vidget").html("Средняя скорость движения: "+AverageV+"км/ч"+";"+" Транспорта на маршруте: "+numberOfVehicles);
+              }, 15000);
+
+    div class="buttons" 
+      |<button class="large blue button" onclick="showForward()">Прямое направление</button>   
+      
+      |<button class="large button" onclick="showBack()">Обратное направление</button>   
+
+    
+      |<button class="large green button" onclick="showStops()">Показать остановки</button>   
+      
+      |<button class="large red button" onclick="hideStops()">Скрыть остановки</button>   
+
+  

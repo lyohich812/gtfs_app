@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  trip_id: 1
+  arrival_time: MyString
+  departure_time: MyString
+  stop_id: 1
+  stop_sequence: 1
+  shape_id: MyString
+  shape_dist_travelled: 1.5
+
+two:
+  trip_id: 1
+  arrival_time: MyString
+  departure_time: MyString
+  stop_id: 1
+  stop_sequence: 1
+  shape_id: MyString
+  shape_dist_travelled: 1.5

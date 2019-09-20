@@ -1,0 +1,13 @@
+<h1>Маршруты</h1>
+
+<%= will_paginate %>
+
+<ul class="routes">
+  <% @routes.each do |route| %>
+    <li>
+      <%= link_to route.route_long_name, route %>
+    </li>
+  <% end %>
+</ul>
+
+<%= will_paginate %>

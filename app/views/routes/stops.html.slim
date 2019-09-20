@@ -1,0 +1,11 @@
+head
+body
+    div class="stops"
+    =@stops = @stops.to_a
+        |<script>
+            var stops =  #{raw @stops}; 
+
+            for (var i=0; i<stops.length; i++){
+                window.print(stops[i]);
+            }
+        |</script>
