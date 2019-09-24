@@ -18,6 +18,9 @@ gem 'bootstrap-will_paginate', '1.0.0'
 gem 'bootstrap-sass',          '3.3.7'
 gem 'sass-rails',              '5.0.6'
 gem 'jquery-rails'
+gem 'rack-cors'
+gem 'sidekiq'
+gem 'whenever', require: false
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 gem 'leaflet-rails'

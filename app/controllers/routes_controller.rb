@@ -1,5 +1,6 @@
 class RoutesController < ApplicationController
 before_action :show, except: [:index]
+RealtimeJob.perform_later
   def index
     #kak to nado zamutit lishnie routes bez trips ubrat UPD: zamutil    
     @routes = Route.where(route_id: Trip.distinct.pluck(:route_id)).paginate(page: params[:page])       

@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190916093120) do
+ActiveRecord::Schema.define(version: 20190923160609) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "chat_messages", force: :cascade do |t|
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "routes", force: :cascade do |t|
     t.integer "route_id"
@@ -80,6 +86,21 @@ ActiveRecord::Schema.define(version: 20190916093120) do
     t.index ["route_id"], name: "index_trips_on_route_id"
     t.index ["shape_id"], name: "index_trips_on_shape_id"
     t.index ["trip_id"], name: "index_trips_on_trip_id"
+  end
+
+  create_table "vehicles", force: :cascade do |t|
+    t.datetime "timestamp"
+    t.string "position"
+    t.integer "direction"
+    t.integer "routeId"
+    t.integer "vehicleLabel"
+    t.integer "velocity"
+    t.integer "vehicleId"
+    t.integer "orderNumber"
+    t.string "licensePlate"
+    t.integer "directionId"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
