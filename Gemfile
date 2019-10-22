@@ -15,7 +15,7 @@ gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
 gem 'will_paginate',           '3.1.6'
 gem 'bootstrap-will_paginate', '1.0.0'
-gem 'bootstrap-sass',          '3.3.7'
+gem 'bootstrap-sass',          '3.4.1'
 gem 'sass-rails',              '5.0.6'
 gem 'jquery-rails'
 gem 'rack-cors'
